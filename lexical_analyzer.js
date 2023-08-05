@@ -12,6 +12,10 @@ function analyze() {
 
   // Display the results
   displayResults(tokens);
+
+  // Calculate and display the total tokens
+  const totalTokens = tokens.length;
+  document.getElementById('totalTokens').innerText = `${totalTokens}`;
 }
 
 function getTokenType(token) {
@@ -48,4 +52,3 @@ function displayResults(tokens) {
   output += '</table>';
   resultDiv.innerHTML = output;
 }
-
