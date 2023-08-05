@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Scanner Analisis Leksikal (PHP)</title>
+    <link rel="icon" href="img/icon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <style>
+      table {
+        border-collapse: collapse;
+        width: 80%; /* Atur lebar tabel sesuai kebutuhan */
+            margin: 0 auto;
+      }
+  
+      th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        background-color: white;
+      }
+  
+      th {
+        text-transform: uppercase;
+        background-color: antiquewhite;
+        text-align: center;
+      }
+
+      .image-container {
+        background-color: white;
+        padding: 2px; /* Tambahkan padding jika diperlukan */
+      }
+    </style>
+  </head>
+
+  <body style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif; background-color: azure;">
+    <div>
+      <nav class="navbar bg-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-bold" href="index.html" style="color: white;">
+            &nbsp;&nbsp;<span class="image-container"><img src="img/icon.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"></span>
+            Scanner Analisis Leksikal Kode PHP
+          </a>
+        </div>
+      </nav>
+
+      <div class="m-3">
+        <form action="javascript:void(0);">
+
+          <div class="form-group">
+            <textarea class="form-control" id="phpCode" rows="8" cols="50" placeholder="Masukkan kode PHP di sini..."></textarea>
+          </div>
+
+          <div class="text-center m-3 d-grid gap-2 col-6 mx-auto">
+            <button class="btn btn-outline-warning fw-bold" onclick="analyze()" style="border-radius: 10px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-upc-scan" viewBox="0 0 16 16">
+                <path d="M1.5 1a.5.5 0 0 0-.5.5v3a.5.5 0 0 1-1 0v-3A1.5 1.5 0 0 1 1.5 0h3a.5.5 0 0 1 0 1h-3zM11 .5a.5.5 0 0 1 .5-.5h3A1.5 1.5 0 0 1 16 1.5v3a.5.5 0 0 1-1 0v-3a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 1-.5-.5zM.5 11a.5.5 0 0 1 .5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 1 0 1h-3A1.5 1.5 0 0 1 0 14.5v-3a.5.5 0 0 1 .5-.5zm15 0a.5.5 0 0 1 .5.5v3a1.5 1.5 0 0 1-1.5 1.5h-3a.5.5 0 0 1 0-1h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 1 .5-.5zM3 4.5a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7zm2 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-7zm3 0a.5.5 0 0 1 1 0v7a.5.5 0 0 1-1 0v-7z"/>
+              </svg>
+              &nbsp;Scan Kode
+            </button>
+
+            <button type="reset" class="btn btn-outline-danger fw-bold" style="border-radius: 10px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="20" fill="currentColor" class="bi bi-arrow-counterclockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3.5a5.5 5.5 0 0 0-5.354 6.978l-.586-.586A6.502 6.502 0 0 1 8 2a6.5 6.5 0 0 1 5.774 9.048l-1.493-1.493A4.5 4.5 0 0 0 8 3.5zM4 8a4.5 4.5 0 0 1 6.978-3.854l-1.493 1.493A2.5 2.5 0 0 0 4 8zm8.024 2.646a4.5 4.5 0 0 1-1.56 1.56l1.493 1.493A2.5 2.5 0 0 0 14 8a2.5 2.5 0 0 0-2.978-2.354l-1.493 1.493a4.5 4.5 0 0 1 1.56 1.56zM8 4.5a3.5 3.5 0 0 1 3.354 4.478l.586.586A4.502 4.502 0 0 0 8 3a4.5 4.5 0 0 0-3.976 6.5l1.493-1.493A2.5 2.5 0 0 1 8 5.5z"/>
+              </svg>
+              &nbsp;Reset Kode
+            </button>
+          </div>
+
+        </form>
+      </div>
+    
+      <hr>
+
+      <h4 class="text-center text-decoration-underline fw-bold" style="letter-spacing: 3px;">Hasil Scanner</h4>
+      <div id="result"></div>
+    </div>
+
+    <div class="py-5"></div>
+    <div class="py-5"></div>
+    <div class="container-fluid copyright py-5 bg-dark">
+      <div class="container">
+          <div class="row">
+              <div class="text-center mb-md-0" style="font-size: 18px; color: white;">
+                  &copy; <a class="fw-medium" href="#" style="color: white; text-decoration: none;">Scanner Analisis Leksikal Bahasa PHP 2023</a>
+              </div>
+          </div>
+      </div>
+  </div>
+
+    <script src="lexical_analyzer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+  </body>
+</html>
